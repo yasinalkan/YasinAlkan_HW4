@@ -1,0 +1,46 @@
+﻿@model CetBookStore1.Models.Book
+
+@{
+    ViewData["Title"] = "ManageImage";
+}
+
+<h1>Manage Image</h1>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Authors)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Authors)
+        </dd>
+
+    </dl>
+    <ul>
+        @foreach (var image in Model.BookImages)
+        {
+            <li>
+                @image.FileName
+            <img src="~/UserImages/@image.FileName" />
+        </li>
+    }
+    </ul>
+    <form asp-action="UploadImage" enctype="multipart/form-data">
+        <input type="hidden" name="BookId" id="BookId" value="@Model.Id" />
+        <input type="file" name="ImageFile" id="ImageFile" />
+        <input type="submit" value="Yükle" />
+    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
